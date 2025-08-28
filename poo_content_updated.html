@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programación Orientada a Objetos en Java</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #e3f2fd 0%, #f5f5f5 100%);
+            color: #333;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%);
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .home-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .home-btn:hover {
+            background: white;
+            color: #1976d2;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Main Title */
+        .main-title {
+            text-align: center;
+            color: #1976d2;
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+        }
+        
+        /* Section Cards */
+        .section {
+            background: white;
+            margin: 2rem 0;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+        
+        .section-header {
+            background: linear-gradient(135deg, #37474f 0%, #546e7a 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .section-content {
+            padding: 2rem;
+        }
+        
+        /* Subsections */
+        .subsection {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-left: 4px solid #1976d2;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .subsection h3 {
+            color: #1976d2;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .subsection p {
+            color: #555;
+            margin-bottom: 1rem;
+        }
+        
+        /* Code Blocks */
+        .code-block {
+            background: #263238;
+            color: #e0e0e0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .code-block .keyword {
+            color: #64b5f6;
+        }
+        
+        .code-block .string {
+            color: #81c784;
+        }
+        
+        .code-block .comment {
+            color: #90a4ae;
+            font-style: italic;
+        }
+        
+        /* Navigation */
+        .nav-menu {
+            background: white;
+            padding: 1rem 0;
+            margin: 2rem 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .nav-link {
+            color: #1976d2;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .nav-link:hover {
+            background: #1976d2;
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        /* Footer */
+        .footer {
+            background: #37474f;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .main-title {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            .section-content {
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="logo">☕ Java POO</a>
+            <a href="index.html" class="home-btn">🏠 Ir a Home</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1 class="main-title">Programación Orientada a Objetos</h1>
+        <p class="subtitle">Conceptos fundamentales de POO en Java</p>
+
+        <nav class="nav-menu">
+            <div class="nav-links">
+                <a href="#estructuras" class="nav-link">Estructuras de Control</a>
+                <a href="#clases" class="nav-link">Clases y Objetos</a>
+                <a href="#pilares" class="nav-link">Pilares de POO</a>
+            </div>
+        </nav>
+
+        <section id="estructuras" class="section">
+            <div class="section-header">
+                📋 Sección 1: Estructuras de Control
+            </div>
+            <div class="section-content">
+                
+                <div class="subsection">
+                    <h3>Bucle while</h3>
+                    <p><strong>Definición:</strong> Se utiliza cuando no sabemos cuántas veces se repetirá un bloque de código, pero sí conocemos la condición que debe cumplirse.</p>
+                    
+                    <h4>Sintaxis:</h4>
+                    <div class="code-block">
+<span class="keyword">while</span> (condición) {
+    <span class="comment">// Código a ejecutar</span>
+}
+                    </div>
+
+                    <h4>Ejemplo: Contar del 1 al 10</h4>
+                    <div class="code-block">
+<span class="keyword">int</span> i = 1;
+<span class="keyword">while</span> (i <= 10) {
+    System.out.println(i);
+    i++;
+}
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Bucle do-while</h3>
+                    <p><strong>Definición:</strong> Similar al while, pero garantiza que el código se ejecutará al menos una vez.</p>
+                    
+                    <h4>Sintaxis:</h4>
+                    <div class="code-block">
+<span class="keyword">do</span> {
+    <span class="comment">// Código a ejecutar</span>
+} <span class="keyword">while</span> (condición);
+                    </div>
+
+                    <h4>Ejemplo: Menú simple</h4>
+                    <div class="code-block">
+<span class="keyword">int</span> opcion;
+<span class="keyword">do</span> {
+    System.out.println(<span class="string">"1. Opción A"</span>);
+    System.out.println(<span class="string">"2. Opción B"</span>);
+    System.out.println(<span class="string">"3. Salir"</span>);
+    opcion = scanner.nextInt();
+} <span class="keyword">while</span> (opcion != 3);
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Bucle for</h3>
+                    <p><strong>Definición:</strong> Ideal para recorrer un número conocido de repeticiones.</p>
+                    
+                    <h4>Sintaxis:</h4>
+                    <div class="code-block">
+<span class="keyword">for</span> (inicialización; condición; incremento) {
+    <span class="comment">// Código a ejecutar</span>
+}
+                    </div>
+
+                    <h4>Ejemplo: Recorrer un arreglo</h4>
+                    <div class="code-block">
+<span class="keyword">int</span>[] numeros = {1, 2, 3, 4, 5};
+<span class="keyword">for</span> (<span class="keyword">int</span> j = 0; j < numeros.length; j++) {
+    System.out.println(numeros[j]);
+}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="clases" class="section">
+            <div class="section-header">
+                🏗️ Sección 2: Clases, Objetos y Métodos
+            </div>
+            <div class="section-content">
+                
+                <div class="subsection">
+                    <h3>Clases y Objetos</h3>
+                    <p><strong>Definición:</strong> Una clase es como un molde, y los objetos son las instancias creadas a partir de ese molde.</p>
+                    
+                    <div class="code-block">
+<span class="keyword">class</span> Coche {
+    String color;
+    String marca;
+    <span class="keyword">int</span> velocidad;
+}
+
+<span class="keyword">public class</span> Main {
+    <span class="keyword">public static void</span> main(String[] args) {
+        Coche coche1 = <span class="keyword">new</span> Coche();
+        coche1.color = <span class="string">"Rojo"</span>;
+        coche1.marca = <span class="string">"Toyota"</span>;
+        coche1.velocidad = 120;
+        
+        Coche coche2 = <span class="keyword">new</span> Coche();
+        coche2.color = <span class="string">"Azul"</span>;
+        coche2.marca = <span class="string">"Ford"</span>;
+        coche2.velocidad = 100;
+    }
+}
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Métodos</h3>
+                    <p><strong>Definición:</strong> Son comportamientos que los objetos pueden realizar.</p>
+                    
+                    <div class="code-block">
+<span class="keyword">class</span> Coche {
+    <span class="keyword">void</span> acelerar() {
+        System.out.println(<span class="string">"El coche está acelerando"</span>);
+    }
+}
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Sobrecarga de Métodos</h3>
+                    <div class="code-block">
+<span class="keyword">class</span> Calculadora {
+    <span class="keyword">int</span> sumar(<span class="keyword">int</span> a, <span class="keyword">int</span> b) {
+        <span class="keyword">return</span> a + b;
+    }
+
+    <span class="keyword">double</span> sumar(<span class="keyword">double</span> a, <span class="keyword">double</span> b) {
+        <span class="keyword">return</span> a + b;
+    }
+}
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Modificador static</h3>
+                    <div class="code-block">
+<span class="keyword">class</span> Utilidad {
+    <span class="keyword">static int</span> contadorDeInstancias = 0;
+
+    <span class="keyword">static void</span> mostrarMensaje() {
+        System.out.println(<span class="string">"Este es un método estático."</span>);
+    }
+}
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Clases Locales</h3>
+                    <div class="code-block">
+<span class="keyword">class</span> Main {
+    <span class="keyword">void</span> metodoConClaseLocal() {
+        <span class="keyword">class</span> ClaseLocal {
+            <span class="keyword">void</span> mostrar() {
+                System.out.println(<span class="string">"Soy una clase local."</span>);
+            }
+        }
+        ClaseLocal obj = <span class="keyword">new</span> ClaseLocal();
+        obj.mostrar();
+    }
+}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pilares" class="section">
+            <div class="section-header">
+                🏛️ Sección 3: Pilares y Conceptos Avanzados
+            </div>
+            <div class="section-content">
+                
+                <div class="subsection">
+                    <h3>Encapsulamiento</h3>
+                    <div class="code-block">
+<span class="keyword">class</span> CuentaBancaria {
+    <span class="keyword">private double</span> saldo;
+
+    <span class="keyword">public void</span> depositar(<span class="keyword">double</span> cantidad) {
+        saldo += cantidad;
+    }
+
+    <span class="keyword">public void</span> retirar(<span class="keyword">double</span> cantidad) {
+        <span class="keyword">if</span> (saldo >= cantidad) {
+            saldo -= cantidad;
+        }
+    }
+}
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Composición</h3>
+                    <div class="code-block">
+<span class="keyword">class</span> Motor {
+    <span class="keyword">void</span> encender() {
+        System.out.println(<span class="string">"Motor encendido"</span>);
+    }
+}
+
+<span class="keyword">class</span> Coche {
+    Motor motor = <span class="keyword">new</span> Motor();
+}
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Delegación</h3>
+                    <div class="code-block">
+<span class="keyword">class</span> Impresora {
+    <span class="keyword">void</span> imprimir() {
+        System.out.println(<span class="string">"Imprimiendo..."</span>);
+    }
+}
+
+<span class="keyword">class</span> Gerente {
+    Impresora impresora = <span class="keyword">new</span> Impresora();
+    <span class="keyword">void</span> imprimirReporte() {
+        impresora.imprimir();
+    }
+}
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Clases Envoltorio (Wrapper)</h3>
+                    <div class="code-block">
+Integer num = 10; <span class="comment">// Autoboxing</span>
+<span class="keyword">int</span> valor = num; <span class="comment">// Unboxing</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <p>📚 Material educativo - POO en Java</p>
+        <p>Desarrollado con ❤️ para el aprendizaje</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling para los enlaces de navegación
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Efecto de hover en las secciones
+        document.querySelectorAll('.section').forEach(section => {
+            section.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            
+            section.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>
